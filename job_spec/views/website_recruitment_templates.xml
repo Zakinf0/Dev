@@ -3,83 +3,6 @@
     <template id="job_application_form_inherit" name="Job Application Form"
               inherit_id="website_hr_recruitment.apply">
         <xpath expr="//div[hasclass('s_website_form_rows')]/div[4]" position="after">
-            <div class="col-12 mb-0 py-2 s_website_form_field"
-                 data-type="number" data-name="Field">
-                <div class="row s_col_no_resize s_col_no_bgcolor">
-                    <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px"
-                           for="how_many_years_of_experience">
-                        <span class="s_website_form_label_content">How Many years of experience</span>
-                    </label>
-                    <div class="col-sm">
-                        <input id="how_many_years_of_experience" type="number"
-                               class="form-control s_website_form_input" max="10" min="1"
-                               name="how_many_years_of_experience" required=""
-                               data-fill-with="how_many_years_of_experience"/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 mb-0 py-2 s_website_form_field"
-                 data-type="char" data-name="Field">
-                <div class="row s_col_no_resize s_col_no_bgcolor">
-                    <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="location"></label>
-                    <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="location">
-                        <span class="s_website_form_label_content">Location</span>
-                    </label>
-                    <div class="col-sm">
-                        <input id="location" type="text"
-                               class="form-control s_website_form_input"
-                               name="location"
-                               data-fill-with="location"/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
-                <div class="row s_col_no_resize s_col_no_bgcolor">
-                    <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="mode_of_work">
-                        <span class="s_website_form_label_content">Mode of Work</span>
-                    </label>
-                    <div class="col-sm">
-                        <select id="mode_of_work" class="form-control s_website_form_input" name="mode_of_work"
-                                required="">
-                            <option value="ST">Onsite</option>
-                            <option value="OB">Office</option>
-                            <option value="both">Both</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
-                <div class="row s_col_no_resize s_col_no_bgcolor">
-                    <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="criminal_record">
-                        <span class="s_website_form_label_content">Crimininal Record</span>
-                    </label>
-                    <div class="col-sm">
-                        <select id="criminal_record" class="form-control s_website_form_input" name="criminal_record"
-                                required="">
-                            <option value="Y">Yes</option>
-                            <option value="N">No</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div id="crime_info_div">
-                <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
-                    <div class="row s_col_no_resize s_col_no_bgcolor">
-                        <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="crime_info">
-                            <span class="s_website_form_label_content">Criminal Record Details</span>
-                        </label>
-                        <div class="col-sm">
-                            <input type="text" id="crime_info" class="form-control s_website_form_input"
-                                   name="crime_info"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
                 <div class="row s_col_no_resize s_col_no_bgcolor">
                     <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="citizenship">
@@ -120,6 +43,84 @@
                     </div>
                 </div>
             </div>
+            <div class="col-12 mb-0 py-2 s_website_form_field"
+                 data-type="number" data-name="Field">
+                <div class="row s_col_no_resize s_col_no_bgcolor">
+                    <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px"
+                           for="how_many_years_of_experience">
+                        <span class="s_website_form_label_content">How Many years of experience</span>
+                    </label>
+                    <div class="col-sm">
+                        <input id="how_many_years_of_experience" type="number"
+                               class="form-control s_website_form_input" max="10" min="1"
+                               name="how_many_years_of_experience" required=""
+                               data-fill-with="how_many_years_of_experience"/>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="col-12 mb-0 py-2 s_website_form_field"
+                 data-type="char" data-name="Field">
+                <div class="row s_col_no_resize s_col_no_bgcolor">
+                    <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="location">
+                    <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="location">
+                        <span class="s_website_form_label_content">Location</span>
+                    </label>
+                    <div class="col-sm">
+                        <input id="location" type="text"
+                               class="form-control s_website_form_input"
+                               name="location"
+                               data-fill-with="location"/>
+                    </div>
+                </div>
+            </div>-->
+
+            <!--<div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
+                <div class="row s_col_no_resize s_col_no_bgcolor">
+                    <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="mode_of_work">
+                        <span class="s_website_form_label_content">Mode of Work</span>
+                    </label>
+                    <div class="col-sm">
+                        <select id="mode_of_work" class="form-control s_website_form_input" name="mode_of_work"
+                                required="">
+                            <option value="ST">Onsite</option>
+                            <option value="OB">Office</option>
+                            <option value="both">Both</option>
+                        </select>
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
+                <div class="row s_col_no_resize s_col_no_bgcolor">
+                    <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="criminal_record">
+                        <span class="s_website_form_label_content">Crimininal Record</span>
+                    </label>
+                    <div class="col-sm">
+                        <select id="criminal_record" class="form-control s_website_form_input" name="criminal_record"
+                                required="">
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="crime_info_div">
+                <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
+                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                        <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="crime_info">
+                            <span class="s_website_form_label_content">Criminal Record Details</span>
+                        </label>
+                        <div class="col-sm">
+                            <input type="text" id="crime_info" class="form-control s_website_form_input"
+                                   name="crime_info"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
 
             <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
                 <div class="row s_col_no_resize s_col_no_bgcolor">
