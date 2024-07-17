@@ -27,3 +27,6 @@ class ProjectInherit(models.Model):
     ts_company_id = fields.Selection([('ztq_solutions', 'ZTQ Solutions'),
                                       ('zakheni_ict', 'Zakheni ICT'),
                                       ('zakhinfo_solutions', 'Zakinfo Solutions')], string='Organisation')
+class RecruitmentInherit(models.Model):
+    _inherit = "hr.job"
+    ts_client = fields.Char(string='Client')
