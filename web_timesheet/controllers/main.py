@@ -1,4 +1,3 @@
-
 import math
 import base64
 import xlrd
@@ -28,8 +27,10 @@ regex_patterns = {
 }
 other_date_formats = ["%d %b %Y", "%d %B %Y"]
 
+
 class TimesheetCustomerPortal(TimesheetCustomerPortal):
-    def portal_my_timesheets(self, page=1, sortby=None, filterby=None, search=None, search_in='all', groupby='none', **kw):
+    def portal_my_timesheets(self, page=1, sortby=None, filterby=None, search=None, search_in='all', groupby='none',
+                             **kw):
         Timesheet = request.env['account.analytic.line']
         domain = Timesheet._timesheet_get_portal_domain()
         if request.env.user.has_group('base.group_user'):
@@ -55,13 +56,21 @@ class TimesheetCustomerPortal(TimesheetCustomerPortal):
         searchbar_filters = {
             'all': {'label': _('All'), 'domain': []},
             'today': {'label': _('Today'), 'domain': [("date", "=", today)]},
-            'week': {'label': _('This week'), 'domain': [('date', '>=', date_utils.start_of(today, "week")), ('date', '<=', date_utils.end_of(today, 'week'))]},
-            'month': {'label': _('This month'), 'domain': [('date', '>=', date_utils.start_of(today, 'month')), ('date', '<=', date_utils.end_of(today, 'month'))]},
-            'year': {'label': _('This year'), 'domain': [('date', '>=', date_utils.start_of(today, 'year')), ('date', '<=', date_utils.end_of(today, 'year'))]},
-            'quarter': {'label': _('This Quarter'), 'domain': [('date', '>=', quarter_start), ('date', '<=', quarter_end)]},
-            'last_week': {'label': _('Last week'), 'domain': [('date', '>=', date_utils.start_of(last_week, "week")), ('date', '<=', date_utils.end_of(last_week, 'week'))]},
-            'last_month': {'label': _('Last month'), 'domain': [('date', '>=', date_utils.start_of(last_month, 'month')), ('date', '<=', date_utils.end_of(last_month, 'month'))]},
-            'last_year': {'label': _('Last year'), 'domain': [('date', '>=', date_utils.start_of(last_year, 'year')), ('date', '<=', date_utils.end_of(last_year, 'year'))]},
+            'week': {'label': _('This week'), 'domain': [('date', '>=', date_utils.start_of(today, "week")),
+                                                         ('date', '<=', date_utils.end_of(today, 'week'))]},
+            'month': {'label': _('This month'), 'domain': [('date', '>=', date_utils.start_of(today, 'month')),
+                                                           ('date', '<=', date_utils.end_of(today, 'month'))]},
+            'year': {'label': _('This year'), 'domain': [('date', '>=', date_utils.start_of(today, 'year')),
+                                                         ('date', '<=', date_utils.end_of(today, 'year'))]},
+            'quarter': {'label': _('This Quarter'),
+                        'domain': [('date', '>=', quarter_start), ('date', '<=', quarter_end)]},
+            'last_week': {'label': _('Last week'), 'domain': [('date', '>=', date_utils.start_of(last_week, "week")),
+                                                              ('date', '<=', date_utils.end_of(last_week, 'week'))]},
+            'last_month': {'label': _('Last month'),
+                           'domain': [('date', '>=', date_utils.start_of(last_month, 'month')),
+                                      ('date', '<=', date_utils.end_of(last_month, 'month'))]},
+            'last_year': {'label': _('Last year'), 'domain': [('date', '>=', date_utils.start_of(last_year, 'year')),
+                                                              ('date', '<=', date_utils.end_of(last_year, 'year'))]},
         }
         # default sort by value
         if not sortby:
@@ -79,7 +88,8 @@ class TimesheetCustomerPortal(TimesheetCustomerPortal):
         # pager
         pager = portal_pager(
             url="/my/timesheets",
-            url_args={'sortby': sortby, 'search_in': search_in, 'search': search, 'filterby': filterby, 'groupby': groupby},
+            url_args={'sortby': sortby, 'search_in': search_in, 'search': search, 'filterby': filterby,
+                      'groupby': groupby},
             total=timesheet_count,
             page=page,
             step=_items_per_page
@@ -95,39 +105,22 @@ class TimesheetCustomerPortal(TimesheetCustomerPortal):
                     raw_timesheets_group = Timesheet_sudo.read_group(
                         domain, ["unit_amount:sum", "ids:array_agg(id)"], ["date:day"]
                     )
-                    grouped_timesheets = [(Timesheet_sudo.browse(group["ids"]), group["unit_amount"]) for group in raw_timesheets_group]
+                    grouped_timesheets = [(Timesheet_sudo.browse(group["ids"]), group["unit_amount"]) for group in
+                                          raw_timesheets_group]
 
                 else:
                     time_data = Timesheet_sudo.read_group(domain, [field, 'unit_amount:sum'], [field])
                     mapped_time = dict([(m[field][0] if m[field] else False, m['unit_amount']) for m in time_data])
-                    grouped_timesheets = [(Timesheet_sudo.concat(*g), mapped_time[k.id]) for k, g in groupbyelem(timesheets, itemgetter(field))]
+                    grouped_timesheets = [(Timesheet_sudo.concat(*g), mapped_time[k.id]) for k, g in
+                                          groupbyelem(timesheets, itemgetter(field))]
                 return timesheets, grouped_timesheets
-
-        # def get_timesheets():
-        #     groupby_mapping = self._get_groupby_mapping()
-        #     field = groupby_mapping.get(groupby, None)
-        #     orderby = '%s, %s' % (field, order) if field else order
-        #     timesheets = Timesheet_sudo.search(domain, order=orderby, limit=_items_per_page, offset=pager['offset'])
-        #
-        #     if field:
-        #         if groupby == 'date':
-        #             raw_timesheets_group = Timesheet_sudo._read_group(
-        #                 domain, ['date:day'], ['unit_amount:sum', 'id:array_agg']
-        #             )
-        #             grouped_timesheets = [(records, unit_amount) for __, unit_amount, records in raw_timesheets_group]
-        #         else:
-        #             time_data = Timesheet_sudo._read_group(domain, [field], ['unit_amount:sum'])
-        #             print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>get_timesheets()>>", time_data)
-        #             mapped_time = dict([(m[field][0] if m[field] else False, m['unit_amount']) for m in time_data])
-        #             # mapped_time = {field.id: unit_amount for field, unit_amount in time_data}
-        #             grouped_timesheets = [(Timesheet_sudo.concat(*g), mapped_time[k.id]) for k, g in groupbyelem(timesheets, itemgetter(field))]
-        #         return timesheets, grouped_timesheets
 
             grouped_timesheets = [(
                 timesheets,
                 sum(Timesheet_sudo.search(domain).mapped('unit_amount'))
             )] if timesheets else []
             return timesheets, grouped_timesheets
+
         timesheets, grouped_timesheets = get_timesheets()
         values.update({
             'timesheets': timesheets,
@@ -161,9 +154,9 @@ class WebsiteTimesheet(http.Controller):
             search_string = post.get('search').split('-')[0]
             project = post.get('search').split('-')[1]
             task_list = request.env['project.task'].sudo().search_read(
-                [('project_id','=', int(project))],
+                [('project_id', '=', int(project))],
                 ['id', 'name'])
-            result = json.dumps([{'value': each['name'] ,
+            result = json.dumps([{'value': each['name'],
                                   'id': each['id'],
                                   } for each in task_list])
         else:
@@ -181,8 +174,28 @@ class WebsiteTimesheet(http.Controller):
         task_id = False
         if kw.get('ts_task_id'):
             task_id = request.env['project.task'].sudo().search([('id', '=', int(kw.get('ts_task_id')))])
+            print(kw.get('task'))
+
         else:
-            task_id = request.env['project.task'].sudo().create({'name': kw.get('task_name'), 'project_id': int(kw.get('project'))})
+
+            error = 'Invalid Task Selection ' + (
+                                                               'Please contact the Project '
+                                                               'Management Team: \n\n '
+                                                               'Murendwa - '
+                                                               'murendwar@zakhenict.co.za '
+                                                               '\n Patricia - '
+                                                               'patriciam@zakhenict.co.za '
+                                                               '\n Dennis -  '
+                                                               'dennisk@zakhenict.co.za '
+                                                               '\n Zikhona - '
+                                                               'zikhonan@zakhenict.co.za '
+                                                               '\n and Thando - '
+                                                               'thandom@zakhenict.co.za '
+                                                               '\n\nto assist with '
+                                                               'registering '
+                                                               'the task into the '
+                                                               'database if you cannot find the task on the dropdown list')
+            raise ValidationError(_(error))
 
         company = False
         if kw.get('company_id'):
@@ -190,22 +203,10 @@ class WebsiteTimesheet(http.Controller):
         else:
             company = request.env.user.company_id
 
-        # date_str = kw.get('date')
-        # lang = request.env.context.get('lang')
-        #
-        # try:
-        #     lang_date_format = request.env['res.lang'].search([('code', '=', lang)], limit=1).date_format
-        #     lang_time_format = request.env['res.lang'].search([('code', '=', lang)], limit=1).time_format
-        #     lang_datetime_format = f"{lang_date_format} {lang_time_format}"
-        #     input_datetime = datetime.strptime(date_str, "%m/%d/%Y %I:%M %p")
-        #     formatted_str = input_datetime.strftime(lang_datetime_format)
-        #     formatted_date = datetime.strptime(formatted_str, lang_datetime_format)
-        # except ValueError as e:
-        #     print(f"Error parsing date: {e}")
 
         try:
             fractional, time = math.modf(float(kw.get('duration').replace(":", ".")))
-            float_time = time_to_float(time, int(float_round(fractional, 2) * (10**2)))
+            float_time = time_to_float(time, int(float_round(fractional, 2) * (10 ** 2)))
             vals = {
                 'company_id': company.id if company else request.env.user.company_id.id,
                 'employee_id': int(kw.get('employee_id')) if kw.get('employee_id') else False,
@@ -230,22 +231,10 @@ class WebsiteTimesheet(http.Controller):
         project_id = request.env['project.project'].sudo().browse(int(kw.get('project_id')))
         ts_company_id = False
         if project_id:
-            organisation = dict(request.env['project.project'].sudo()._fields['ts_company_id'].selection).get(project_id.ts_company_id)
+            organisation = dict(request.env['project.project'].sudo()._fields['ts_company_id'].selection).get(
+                project_id.ts_company_id)
             ts_company_id = organisation
-        # Task = http.request.env['project.task']
-        # if project_id:
-        #     tasks = Task.sudo().search([('project_id', '=', int(project_id))])
-        #     ts_company_id
-        #
-        # values = {}
-        # values['datas'] = request.env['ir.ui.view']._render_template(
-        #     "web_timesheet.md_portal_task", {
-        #         'tasks': tasks,
-        #     })
-        # values['datas1'] = request.env['ir.ui.view']._render_template(
-        #     "web_timesheet.md_portal_task_inline", {
-        #         'tasks': tasks,
-        #     })
+
         return {'ts_company_id': ts_company_id}
 
     @http.route(['/my/delete_timesheet'], type='json', auth="user", website=True)
@@ -264,11 +253,8 @@ class WebsiteTimesheet(http.Controller):
         t_date = datetime.strptime(kw.get('date'), date_format)
         timesheet_date = fields.Date.to_string(t_date)
         project_id = request.env['project.project'].search([('id', '=', kw.get('project_id'))])
-        if kw.get('task_id'):
-            task_id = request.env['project.task'].sudo().search([('id', '=', int(kw.get('task_id')))])
-        else:
-            task_id = request.env['project.task'].sudo().create({'name': kw.get('task_name'), 'project_id': project_id.id})
-        # task_id = request.env['project.task'].search([('id', '=', kw.get('task_id'))])
+        task_id = request.env['project.task'].sudo().search([('id', '=', int(kw.get('task_id')))])
+
 
         organisation = ''
         if kw.get('ts_company_id'):
@@ -279,7 +265,7 @@ class WebsiteTimesheet(http.Controller):
 
         try:
             fractional, time = math.modf(float(kw.get('duration').replace(":", ".")))
-            float_time = time_to_float(time, int(float_round(fractional, 2) * (10**2)))
+            float_time = time_to_float(time, int(float_round(fractional, 2) * (10 ** 2)))
             vals = {
                 'date': timesheet_date,
                 'unit_amount': float_time,
@@ -305,8 +291,9 @@ class WebsiteTimesheet(http.Controller):
 
                 for sheet in workbook.sheets():
                     for row_index in range(1, sheet.nrows):
+
+                        # Excel records
                         row = sheet.row(row_index)
-                        # company_name = row[0].value
                         employee_name = row[0].value
                         project_name = row[1].value
                         task_name = row[2].value
@@ -328,29 +315,81 @@ class WebsiteTimesheet(http.Controller):
                                             date = date_object.strftime('%Y-%m-%d')
 
                                     except ValueError as e:
-                                        error = 'Invalid Date format :- %s' % (date_string)
+
+                                        error = ('Invalid Date format :- %s' % (date_string))
                         else:
                             date = datetime.today()
+
                         expenditure_type = row[4].value
                         hours = row[5].value
                         description = row[6].value
 
+                        # Check data existance
+
                         employee = request.env['hr.employee'].sudo().search([('name', '=', employee_name)], limit=1)
+                        project = request.env['project.project'].sudo().search([('name', '=', project_name)],limit=1)
+                        task = request.env['project.task'].sudo().search([('name', '=', task_name)], limit=1)
+
+                        # raise Exceptions
                         if not employee:
-                            error = 'Invalid employee - %s'%(employee_name)
+
+                            error  = 'Invalid employee - %s' % employee_name
+
+                            raise ValidationError(_(error))
+
+                        if not project:
+
+                            error = 'Invalid Project named \"%s\"' % project_name + (' doesn\'t exist. Please '
+                                                                                         'contact the Project '
+                                                                                         'Management Team: \n\n '
+                                                                                         'Murendwa - '
+                                                                                         'murendwar@zakhenict.co.za '
+                                                                                         '\n Patricia - '
+                                                                                         'patriciam@zakhenict.co.za '
+                                                                                         '\n Dennis -  '
+                                                                                         'dennisk@zakhenict.co.za '
+                                                                                         '\n Zikhona - '
+                                                                                         'zikhonan@zakhenict.co.za '
+                                                                                         '\n and Thando - '
+                                                                                         'thandom@zakhenict.co.za '
+                                                                                         '\n\nto assist with '
+                                                                                         'registering '
+                                                                                         'the project into the '
+                                                                                         'database')
+                            raise ValidationError(_(error))
+
+                        if not task:
+
+                            error = 'Invalid Task named \"%s\"' % task_name + (' doesn\'t exist. Please '
+                                                                                         'contact the Project '
+                                                                                         'Management Team: \n\n '
+                                                                                         'Murendwa - '
+                                                                                         'murendwar@zakhenict.co.za '
+                                                                                         '\n Patricia - '
+                                                                                         'patriciam@zakhenict.co.za '
+                                                                                         '\n Dennis -  '
+                                                                                         'dennisk@zakhenict.co.za '
+                                                                                         '\n Zikhona - '
+                                                                                         'zikhonan@zakhenict.co.za '
+                                                                                         '\n and Thando - '
+                                                                                         'thandom@zakhenict.co.za '
+                                                                                         '\n\nto assist with '
+                                                                                         'registering '
+                                                                                         'the task into the '
+                                                                                         'database')
+                            raise ValidationError(_(error))
+
+
                         if project_name:
-                            project = request.env['project.project'].sudo().search([('name', '=', project_name)], limit=1)
+
+                            project = request.env['project.project'].sudo().search([('name', '=', project_name)],
+                                                                                   limit=1)
                             project.message_partner_ids = [request.env.user.partner_id.id]
-                            if not project:
-                                project = request.env['project.project'].sudo().create({'name': project_name,
-                                                                                        'active': True,
-                                                                                        'message_partner_ids': [request.env.user.partner_id.id]})
+
+
                             if task_name:
                                 task = request.env['project.task'].sudo().search([('name', '=', task_name)], limit=1)
-                                if not task:
-                                    task = request.env['project.task'].sudo().create({'name': task_name, 'project_id': project.id})
-                            else:
-                                task = False
+
 
                             if expenditure_type == 'Normal':
                                 expenditure = 'normal'
@@ -363,17 +402,9 @@ class WebsiteTimesheet(http.Controller):
                             else:
                                 expenditure = 'normal'
 
-                            # if company_name == 'ZTQ Solutions':
-                            #     ts_company = 'ztq_solutions'
-                            # elif company_name == 'Zakheni ICT':
-                            #     ts_company = 'zakheni_ict'
-                            # elif company_name == 'Zakinfo Solutions':
-                            #     ts_company = 'zakinfo_solutions'
-                            # else:
-                            #     ts_company = 'ztq_solutions'
                             # Create the timesheet entry
                             timesheet_model.sudo().create({
-                                #'ts_company_id': ts_company,
+
                                 'portal_user_id': request.env.user.id,
                                 'employee_id': employee.id if employee else False,
                                 'date': date,
@@ -386,10 +417,16 @@ class WebsiteTimesheet(http.Controller):
 
                 return request.redirect('/my/timesheets')
         except:
+
             if error:
+
                 raise ValidationError(_(error))
+
             else:
+
                 raise ValidationError(_('Timesheet is not Imported.'))
+
+
 
     def convert_to_date(self, date_str):
         for fmt in other_date_formats:
@@ -397,3 +434,4 @@ class WebsiteTimesheet(http.Controller):
                 return datetime.strptime(date_str, fmt)
             except ValueError:
                 return date_str
+

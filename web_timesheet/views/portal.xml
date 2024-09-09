@@ -35,14 +35,4 @@
             </xpath>
         </field>
     </record>
-       <record id="job_edit_form_inherit" model="ir.ui.view">
-        <field name="name">edit_job.inherit</field>
-        <field name="model">hr.job</field>
-        <field name="inherit_id" ref="hr.view_hr_job_form" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='contract_type_id']" position="after">
-                <field name="ts_client"/>
-            </xpath>
-        </field>
-    </record>
 </odoo>

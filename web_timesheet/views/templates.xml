@@ -23,7 +23,7 @@
 
 
                                     <div class="row m-2">
-                                        <div class="col-lg-3 col-md-3" >
+                                        <div class="col-lg-3 col-md-3">
                                             <label for="employee">Employee:</label>
                                         </div>
                                         <div class="col-lg-8 col-md-8">
@@ -52,6 +52,7 @@
                                             </select>
                                         </div>
                                     </div>
+
                                     <div class="row m-2">
                                         <div class="col-lg-3 col-md-3">
                                             <label for="ts_company_id">Company:</label>
@@ -60,6 +61,7 @@
                                             <input id="ts_company_id" name="ts_company_id" class="form-control" readonly="readonly"/>
                                         </div>
                                     </div>
+
                                     <div class="row m-2" id="task_div">
                                         <div class="col-lg-3 col-md-3">
                                             <label for="task">Task:</label>
@@ -296,7 +298,7 @@
                 </div>
             </td>
         </xpath>
-       
+
         <xpath expr="//tbody[2]//td[hasclass('text-end')]" position="after">
             <td class="py-0 text-center timesheet_size">
                 <a role="button" class="btn btn-sm" style="color: #276e72;" id="edit_timesheet"><i class="fa fa-pencil"/> Edit</a>
@@ -307,7 +309,7 @@
         <xpath expr="//tbody[2]" position="attributes">
             <attribute name="style"></attribute>
             <attribute name="class">tmk_timesheet_table</attribute>
-        </xpath> 
+        </xpath>
            <xpath expr="//tbody[2]//td[1]" position="before">
             <input type="hidden" name="timesheet_id" t-att-value="timesheet.id"/>
         </xpath>

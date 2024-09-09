@@ -4,7 +4,7 @@
     'version': '16.0.1.0.0',
     'summary': """ Web Timesheet""",
     'description': """Web Timesheet""",
-    'author': 'Mayuri Bharadva',
+    'author': 'Mayuri Bharadva & Murendwa Ratshitimba',
     'version': '16.0.0.1.0',
     'category': 'Website',
     'depends': ['website', 'project', 'hr', 'timesheet_grid'],
