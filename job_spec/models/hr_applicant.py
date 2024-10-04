@@ -30,7 +30,7 @@ class Applicant(models.Model):
     disability_type = fields.Text(string="Disability Type")
     criminal_record =  fields.Selection([('N','No'),('Y','Yes')])
     crime_info = fields.Text(string="Crime Information")
-    mode_of_work =  fields.Selection([('ST','Site'),('OB','Office'), ('both','Both')])
+    mode_of_work =  fields.Selection([('ST','Remote'),('OB','Hybrid'), ('both','Onsite')])
     how_many_years_of_experience = fields.Char(string="How many years of experience")
     notice_period = fields.Text(string="Notice period")
     location = fields.Text(string="Location")
