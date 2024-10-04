@@ -52,16 +52,16 @@
                 </xpath>
                 <xpath expr="//form/sheet/notebook" position="before">
                     <group attrs="{'invisible': [('consultant_interview_stage', '!=', True)]}">
-                        <field name="tell_me_about_your_self" required="true"/>
-                        <field name="when_can_you_start" required="true"/>
-                        <field name="what_are_your_salary_expectations" required="true"/>
-                        <field name="why_are_you_in_the_job_market_at_the_moment" required="true"/>
-                        <field name="how_do_you_feel_about_counter_offer" required="true"/>
-                        <field name="what_are_possibilities_of_counter_offer" required="true"/>
-                        <field name="what_are_your_proudest_professional_achievements" required="true"/>
-                        <field name="what_is_your_idea_work_environment" required="true"/>
-                        <field name="are_you_interviewing_with_other_companies" required="true"/>
-                        <field name="when_would_you_be_available_to_start_a_new_role" required="true"/>
+                        <field name="tell_me_about_your_self"/>
+                        <!--<field name="when_can_you_start" />-->
+                        <field name="what_are_your_salary_expectations" />
+                        <field name="why_are_you_in_the_job_market_at_the_moment" />
+                        <field name="how_do_you_feel_about_counter_offer" />
+                        <field name="what_are_possibilities_of_counter_offer" />
+                        <field name="what_are_your_proudest_professional_achievements/>
+                        <field name="what_is_your_idea_work_environment" />
+                        <field name="are_you_interviewing_with_other_companies" />
+                        <field name="when_would_you_be_available_to_start_a_new_role" />
                     </group>
                     <group attrs="{'invisible': [('reference_check_1_stage', '!=', True)]}"  string="Reference Check 1">
                         <field name="reference_check_1_stage" invisible="1"/>
