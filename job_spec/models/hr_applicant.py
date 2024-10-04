@@ -36,17 +36,17 @@ class Applicant(models.Model):
     location = fields.Text(string="Location")
 
     tell_me_about_your_self = fields.Text(string="1. Tell me about yourself")
-    when_can_you_start = fields.Text(string="2. When can you start")
-    what_are_your_salary_expectations = fields.Text(string="3. After you have went through the job spec for this role, what are your salary expectations?")
-    why_are_you_in_the_job_market_at_the_moment = fields.Text(string="4. Why are you in the job market at the moment")
-    how_do_you_feel_about_counter_offer = fields.Text(string="5. How do you feel about counter offer")
-    what_are_possibilities_of_counter_offer = fields.Text(string="6. If my client offers you this job,"
+    #when_can_you_start = fields.Text(string="2. When can you start")
+    what_are_your_salary_expectations = fields.Text(string="2. After you have went through the job spec for this role, what are your salary expectations?")
+    why_are_you_in_the_job_market_at_the_moment = fields.Text(string="3. Why are you in the job market at the moment")
+    how_do_you_feel_about_counter_offer = fields.Text(string="4. How do you feel about counter offer")
+    what_are_possibilities_of_counter_offer = fields.Text(string="5. If my client offers you this job,"
                                                              "what are the possibility of your current company to counter offer?")
-    what_are_your_proudest_professional_achievements = fields.Text(string="7. What are your proudest professional achievements?")
-    what_is_your_idea_work_environment = fields.Text(string="8. What's your ideal work environment?")
+    what_are_your_proudest_professional_achievements = fields.Text(string="6. What are your proudest professional achievements?")
+    what_is_your_idea_work_environment = fields.Text(string="7. What's your ideal work environment?")
     #zakinfo developmemt team
-    are_you_interviewing_with_other_companies = fields.Text(string="9. Are you interviewing with other companies")
-    when_would_you_be_available_to_start_a_new_role = fields.Text(string="10. When would you be available to start a new role")
+    are_you_interviewing_with_other_companies = fields.Text(string="8. Are you interviewing with other companies")
+    when_would_you_be_available_to_start_a_new_role = fields.Text(string="9. When would you be available to start a new role")
 
     # Experience and backgrund tab
     knowledge_areas = fields.Char(string='In what areas are you most knowledgeable?')
