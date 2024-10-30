@@ -11,6 +11,7 @@ class HRApplicantResume(models.Model):
     applicant_id = fields.Many2one("hr.applicant")
     surname = fields.Char(string='Surname')
     first_name = fields.Char(string='First Name')
+    position = fields.Char(string='Position')
     id_passport = fields.Char(string='ID/Passport')
     email = fields.Char(related='applicant_id.email_from')
     languages = fields.Char(string='Languages')
@@ -28,8 +29,8 @@ class HRApplicantResume(models.Model):
         resume = super(HRApplicantResume, self).create(vals)
         if resume.first_name and resume.surname and resume.applicant_id:
             resume.display_name = resume.first_name + ' ' + resume.surname + ' - ' + resume.applicant_id.name.split('-')[1] if len(resume.applicant_id.name.split('-')) > 0 else ''
-        elif resume.first_name and resume.surname:
-            resume.display_name = resume.first_name + ' ' + resume.surname
+        elif resume.first_name and resume.surname and resume.position:
+            resume.display_name = resume.first_name + ' ' + resume.surname + ' - ' + resume.position
         else:
             pass
         return resume
@@ -40,8 +41,8 @@ class HRApplicantResume(models.Model):
             vals['display_name'] = vals.get('first_name') + ' ' + vals.get('surname') + ' - ' + \
                                 applicant_id.name.split('-')[1] if len(
                 applicant_id.name.split('-')) > 0 else ''
-        elif vals.get('first_name') and vals.get('surname'):
-            vals['display_name'] = vals.get('first_name') + ' ' + vals.get('surname')
+        elif vals.get('first_name') and vals.get('surname') and vals.get('position'):
+            vals['display_name'] = vals.get('first_name') + ' ' + vals.get('surname') + ' - ' + vals.get('position')
         else:
             pass
         res = super(HRApplicantResume, self).write(vals)
