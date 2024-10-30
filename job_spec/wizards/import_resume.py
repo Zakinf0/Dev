@@ -7,6 +7,7 @@ from odoo import models, fields, api, _
 import re
 
 
+
 class ImportResume(models.TransientModel):
     _name = 'import.resume'
     _description = 'Zakheni Resume Import'
@@ -20,7 +21,6 @@ class ImportResume(models.TransientModel):
             reader = PdfReader(io.BytesIO(pdf_data))
             values = {}
             skill_summary = ''
-
             for page in reader.pages:
                 resume_content = page.extract_text()
 
