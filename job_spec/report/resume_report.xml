@@ -3,13 +3,24 @@
     <data>
 
         <template id="custom_internal_layout">
-            <div class="header">
+            <!--<div class="header">
                 <div class="row">
                     <div class="col-3">
                     </div>
                     <div class="col-2 offset-2 text-center">
                     </div>
                     <div class="col-2 offset-3 text-end">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><span class="page"/></li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item"><span class="topage"/></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>-->
+            <div class="footer">
+                <div class="row">
+                    <div class="col-12 text-end">
                         <ul class="list-inline">
                             <li class="list-inline-item"><span class="page"/></li>
                             <li class="list-inline-item">/</li>
@@ -68,7 +79,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12 text-center">
-                                        <h3><span t-esc="o.first_name"></span> <span t-esc="o.surname"/></h3><br/>
+                                        <h4>of</h4>
+                                        <h3><span t-esc="o.first_name"></span> <span t-esc="o.surname"></span></h3><br/>
+                                        <h4><span t-esc="o.position"></span></h4>
                                     </div>
                                     <br/><br/>
                                 </div>
@@ -94,6 +107,14 @@
                                                 </td>
                                                 <td><span t-esc="o.first_name"/> </td>
                                             </tr>
+                                            <!-- Position -->
+                                            <tr>
+                                                <td style="background-color:#D3D3D3" width="25%" class="text-right">
+                                                    Position
+                                                </td>
+                                                <td><span t-esc="o.position"/> </td>
+                                            </tr>
+                                            <!-- end -->
                                             <tr>
                                                 <td style="background-color:#D3D3D3" width="25%" class="text-right">
                                                     ID No. / Passport
@@ -106,6 +127,18 @@
                                                 </td>
                                                 <td><span t-esc="o.languages"/> </td>
                                             </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <br/><br/>
+                                        <table class="table table-bordered mb64">
+                                            <div style="background-color:#D3D3D3" class="text-left"><h3>Executive Summary</h3></div><br/>
+                                            <div style="background-color:#D3D3D3" class="text-left"><h4 style="background-color:#D3D3D3">Summary</h4></div>
+                                            <div class="justify-content-start">
+                                                <span t-esc="o.executive_summary"/>
+                                            </div>
                                         </table>
                                     </div>
                                 </div>
@@ -131,18 +164,7 @@
                                         </table>
                                     </div>
                                 </div>
-<!--                                <div class="row">-->
-<!--                                    <div class="col-12">-->
-<!--                                        <br/><br/>-->
-<!--                                        <table class="table table-bordered mb64">-->
-<!--                                            <div style="background-color:#D3D3D3" class="text-left"><h3>Summary of Skills</h3></div><br/>-->
-<!--                                            <div style="background-color:#D3D3D3" class="text-left"><h4 style="background-color:#D3D3D3">Skills</h4></div>-->
-<!--                                            <div class="justify-content-start">-->
-<!--                                                <span t-esc="o.skills_summary"/>-->
-<!--                                            </div>-->
-<!--                                        </table>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+
 <!--                                <div class="row">-->
 <!--                                    <div class="col-12">-->
 <!--                                        <br/><br/>-->
