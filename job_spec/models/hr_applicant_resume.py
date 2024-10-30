@@ -16,7 +16,7 @@ class HRApplicantResume(models.Model):
     email = fields.Char(related='applicant_id.email_from')
     languages = fields.Char(string='Languages')
     qualification_ids = fields.One2many('applicant.qualification', 'resume_id', string="Qualifications")
-    skills_summary = fields.Text(string='Skills summary')
+    executive_summary = fields.Text(string='Executive Summary')
     additional_comments = fields.Text(string='Additional Comments')
     course_ids = fields.One2many('applicant.course', 'resume_id', string="Courses")
     employment_history_ids = fields.One2many('applicant.employment.history', 'resume_id', string="Employment History")
