@@ -23,6 +23,7 @@
                             <group>
                                 <field name="surname"/>
                                 <field name="first_name"/>
+                                <field name="position"/>
                             </group>
                             <group>
                                 <field name="id_passport"/>
