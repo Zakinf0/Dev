@@ -2,13 +2,11 @@
 
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
-from odoo.exceptions import ValidationError
 import rsaidnumber
 import PyPDF2
 from pypdf import PdfReader
 import base64
 import io
-import re
 
 
 
@@ -30,23 +28,23 @@ class Applicant(models.Model):
     disability_type = fields.Text(string="Disability Type")
     criminal_record =  fields.Selection([('N','No'),('Y','Yes')])
     crime_info = fields.Text(string="Crime Information")
-    mode_of_work =  fields.Selection([('ST','Remote'),('OB','Hybrid'), ('both','Onsite')])
+    mode_of_work =  fields.Selection([('ST','Site'),('OB','Office'), ('both','Both')])
     how_many_years_of_experience = fields.Char(string="How many years of experience")
     notice_period = fields.Text(string="Notice period")
     location = fields.Text(string="Location")
 
     tell_me_about_your_self = fields.Text(string="1. Tell me about yourself")
-    #when_can_you_start = fields.Text(string="2. When can you start")
-    what_are_your_salary_expectations = fields.Text(string="2. After you have went through the job spec for this role, what are your salary expectations?")
-    why_are_you_in_the_job_market_at_the_moment = fields.Text(string="3. Why are you in the job market at the moment")
-    how_do_you_feel_about_counter_offer = fields.Text(string="4. How do you feel about counter offer")
-    what_are_possibilities_of_counter_offer = fields.Text(string="5. If my client offers you this job,"
+    when_can_you_start = fields.Text(string="2. When can you start")
+    what_are_your_salary_expectations = fields.Text(string="3. After you have went through the job spec for this role, what are your salary expectations?")
+    why_are_you_in_the_job_market_at_the_moment = fields.Text(string="4. Why are you in the job market at the moment")
+    how_do_you_feel_about_counter_offer = fields.Text(string="5. How do you feel about counter offer")
+    what_are_possibilities_of_counter_offer = fields.Text(string="6. If my client offers you this job,"
                                                              "what are the possibility of your current company to counter offer?")
-    what_are_your_proudest_professional_achievements = fields.Text(string="6. What are your proudest professional achievements?")
-    what_is_your_idea_work_environment = fields.Text(string="7. What's your ideal work environment?")
+    what_are_your_proudest_professional_achievements = fields.Text(string="7. What are your proudest professional achievements?")
+    what_is_your_idea_work_environment = fields.Text(string="8. What's your ideal work environment?")
     #zakinfo developmemt team
-    are_you_interviewing_with_other_companies = fields.Text(string="8. Are you interviewing with other companies")
-    when_would_you_be_available_to_start_a_new_role = fields.Text(string="9. When would you be available to start a new role")
+    are_you_interviewing_with_other_companies = fields.Text(string="9. Are you interviewing with other companies")
+    when_would_you_be_available_to_start_a_new_role = fields.Text(string="10. When would you be available to start a new role")
 
     # Experience and backgrund tab
     knowledge_areas = fields.Char(string='In what areas are you most knowledgeable?')
@@ -232,149 +230,6 @@ class Applicant(models.Model):
     f2f_interview_date = fields.Date()
     f2f_interview_time = fields.Char()
     f2f_interview_place = fields.Char()
-
-    # zakinfo development team reference check 1
-    @api.constrains('ref_1_reference_check_for', 'ref_1_referee_name', 'ref_1_company', 'ref_1_contact_number', 
-                    'ref_1_company_worked_with', 'ref_1_position_held', 'ref_1_duration_worked', 'ref_1_placement_position', 
-                    'ref_1_skills_for_role', 'ref_1_greatest_strengths', 'ref_1_area_of_development', 'ref_1_communication_skill', 
-                    'ref_2_relationship_with_coworkers', 'ref_1_biggest_accomplishment', 'ref_1_reason_for_leaving', 'ref_1_additional_comments')
-    def _check_fields_1(self):
-        for record in self:
-            # Validate that certain fields only contain alphabetic characters and spaces
-            alphabetic_fields = [
-                'ref_1_reference_check_for', 'ref_1_referee_name', 'ref_1_company', 'ref_1_company_worked_with',
-                'ref_1_position_held', 'ref_1_duration_worked', 'ref_1_placement_position', 'ref_1_skills_for_role',
-                'ref_1_greatest_strengths', 'ref_1_area_of_development', 'ref_1_communication_skill', 
-                'ref_1_relationship_with_coworkers', 'ref_1_biggest_accomplishment', 'ref_1_reason_for_leaving', 'ref_1_additional_comments'
-            ]
-            for field in alphabetic_fields:
-                value = getattr(record, field)
-                if value and not value.replace(' ', '').isalpha():
-                    raise ValidationError(f"The field '{self._fields[field].string}' must contain only alphabetic characters and spaces.")
-
-            # Validate that the contact number contains exactly 10 digits
-            contact_number = record.ref_1_contact_number
-            if contact_number:
-                if not contact_number.isdigit() or len(contact_number) != 10:
-                    raise ValidationError("Contact number must contain exactly 10 digits.")
-
-    # zakinfo development team reference check 2
-
-    '''@api.constrains('ref_2_reference_check_for', 'ref_2_referee_name', 'ref_2_company', 'ref_2_contact_number', 
-                    'ref_2_company_worked_with', 'ref_2_position_held', 'ref_2_duration_worked', 'ref_2_placement_position', 
-                    'ref_2_skills_for_role', 'ref_2_greatest_strengths', 'ref_2_area_of_development', 'ref_2_communication_skill', 
-                    'ref_2_relationship_with_coworkers', 'ref_2_biggest_accomplishment', 'ref_2_reason_for_leaving', 'ref_2_additional_comments')
-    def _check_fields_2(self):
-        for record in self:
-            # Validate that certain fields only contain alphabetic characters and spaces
-            alphabetic_fields = [
-                'ref_2_reference_check_for', 'ref_2_referee_name', 'ref_2_company', 'ref_2_company_worked_with',
-                'ref_2_position_held', 'ref_2_duration_worked', 'ref_2_placement_position', 'ref_2_skills_for_role',
-                'ref_2_greatest_strengths', 'ref_2_area_of_development', 'ref_2_communication_skill', 'ref_2_relationship_with_coworkers', 
-                'ref_2_biggest_accomplishment', 'ref_2_reason_for_leaving', 'ref_2_additional_comments'
-            ]
-            for field in alphabetic_fields:
-                value = getattr(record, field)
-                if value and not value.replace(' ', '').isalpha():
-                    raise ValidationError(f"The field '{self._fields[field].string}' must contain only alphabetic characters and spaces.")
-
-            # Validate that the contact number contains exactly 10 digits
-            contact_number = record.ref_2_contact_number
-            if contact_number:
-                if not contact_number.isdigit() or len(contact_number) != 10:
-                    raise ValidationError("Contact number must contain exactly 10 digits.")'''
-
-    @api.constrains('ref_2_reference_check_for', 'ref_2_referee_name', 'ref_2_company', 'ref_2_contact_number', 
-                    'ref_2_company_worked_with', 'ref_2_position_held', 'ref_2_duration_worked', 'ref_2_placement_position', 
-                    'ref_2_skills_for_role', 'ref_2_greatest_strengths', 'ref_2_area_of_development', 'ref_2_communication_skill', 
-                    'ref_2_relationship_with_coworkers', 'ref_2_biggest_accomplishment', 'ref_2_reason_for_leaving', 
-                    'ref_2_additional_comments')
-    def _check_fields_2(self):
-        for record in self:
-            # Define the regular expression pattern to allow alphabetic and special characters
-            pattern = re.compile(r'^[\w\s\-\.\,\!\?\:]+$', re.UNICODE)
-
-            # Validate that certain fields only contain alphabetic characters and special characters
-            alphabetic_fields = [
-                'ref_2_reference_check_for', 'ref_2_referee_name', 'ref_2_company', 'ref_2_company_worked_with',
-                'ref_2_position_held', 'ref_2_duration_worked', 'ref_2_placement_position', 'ref_2_skills_for_role',
-                'ref_2_greatest_strengths', 'ref_2_area_of_development', 'ref_2_communication_skill', 
-                'ref_2_relationship_with_coworkers', 'ref_2_biggest_accomplishment', 'ref_2_reason_for_leaving', 
-                'ref_2_additional_comments'
-            ]
-            for field in alphabetic_fields:
-                value = getattr(record, field)
-                if value and not pattern.match(value):
-                    raise ValidationError(f"The field '{self._fields[field].string}' must contain only alphabetic characters, numbers, and special characters.")
-            
-            # Validate that the contact number contains exactly 10 digits
-            contact_number = record.ref_2_contact_number
-            if contact_number:
-                if not contact_number.isdigit() or len(contact_number) != 10:
-                    raise ValidationError("Contact number must contain exactly 10 digits.")
-
-    # zakinfo development team reference check 3
-    @api.constrains('ref_3_reference_check_for', 'ref_3_referee_name', 'ref_3_company', 'ref_3_contact_number', 
-                    'ref_3_company_worked_with', 'ref_3_position_held', 'ref_3_duration_worked', 'ref_3_placement_position', 
-                    'ref_3_skills_for_role', 'ref_3_greatest_strengths', 'ref_3_area_of_development', 'ref_3_communication_skill', 
-                    'ref_2_relationship_with_coworkers', 'ref_3_biggest_accomplishment', 'ref_3_reason_for_leaving', 'ref_3_additional_comments')
-    def _check_fields(self):
-        for record in self:
-            # Validate that certain fields only contain alphabetic characters and spaces
-            alphabetic_fields = [
-                'ref_3_reference_check_for', 'ref_3_referee_name', 'ref_3_company', 'ref_3_company_worked_with',
-                'ref_3_position_held', 'ref_3_duration_worked', 'ref_3_placement_position', 'ref_3_skills_for_role',
-                'ref_3_greatest_strengths', 'ref_3_area_of_development', 'ref_3_communication_skill', 
-                'ref_2_relationship_with_coworkers', 'ref_3_biggest_accomplishment', 'ref_3_reason_for_leaving', 'ref_3_additional_comments'
-            ]
-            for field in alphabetic_fields:
-                value = getattr(record, field)
-                if value and not value.replace(' ', '').isalpha():
-                    raise ValidationError(f"The field '{self._fields[field].string}' must contain only alphabetic characters and spaces.")
-
-            # Validate that the contact number contains exactly 10 digits
-            contact_number = record.ref_3_contact_number
-            if contact_number:
-                if not contact_number.isdigit() or len(contact_number) != 10:
-                    raise ValidationError("Contact number must contain exactly 10 digits.")
-
-    # zakinfo development team consultant interview validation 
-
-    @api.constrains('tell_me_about_your_self', 
-                    'why_are_you_in_the_job_market_at_the_moment', 'how_do_you_feel_about_counter_offer', 
-                    'what_are_possibilities_of_counter_offer', 'what_are_your_proudest_professional_achievements', 
-                    'what_is_your_idea_work_environment', 'are_you_interviewing_with_other_companies')
-
-    def _check_text_fields_ci(self):
-        for record in self:
-            text_fields = [
-                'tell_me_about_your_self', 
-                'why_are_you_in_the_job_market_at_the_moment', 'how_do_you_feel_about_counter_offer', 
-                'what_are_possibilities_of_counter_offer', 'what_are_your_proudest_professional_achievements', 
-                'what_is_your_idea_work_environment', 'are_you_interviewing_with_other_companies'
-            ]
-            for field in text_fields:
-                value = getattr(record, field)
-                if value and not all(c.isalpha() or c.isspace() for c in value):
-                    raise ValidationError(f"The field '{self._fields[field].string}' must contain only alphabetic characters and spaces.")
-
-    # zakinfo development team client interview 
-    @api.constrains('candidate_interview_experience', 'candidate_feelings_about_role', 'candidate_questions_asked', 
-                    'candidate_own_questions', 'client_interview_experience', 'client_candidate_ability', 
-                    'client_candidate_strengths_weaknesses', 'client_information_needed', 'client_next_steps', 'client_offering_interview')
-    def _check_text_fields_cin(self):
-        for record in self:
-            text_fields = [
-                'candidate_interview_experience', 'candidate_feelings_about_role', 'candidate_questions_asked', 
-                'candidate_own_questions', 'client_interview_experience', 'client_candidate_ability', 
-                'client_candidate_strengths_weaknesses', 'client_information_needed', 'client_next_steps', 'client_offering_interview'
-            ]
-            for field in text_fields:
-                value = getattr(record, field)
-                if value and not all(c.isalpha() or c.isspace() for c in value):
-                    raise ValidationError(f"The field '{self._fields[field].string}' must contain only alphabetic characters and spaces.")
-    
-
 
     @api.depends('stage_id')
     def _compute_stage_id(self):

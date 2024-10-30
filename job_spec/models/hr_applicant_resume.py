@@ -34,7 +34,6 @@ class HRApplicantResume(models.Model):
             pass
         return resume
 
-    @api.model
     def write(self, vals):
         if vals.get('first_name') and vals.get('surname') and vals.get('applicant_id'):
             applicant_id = self.env['hr.applicant'].sudo().browse(int(self.applicant_id))
@@ -74,7 +73,7 @@ class ApplicantEmploymentHistory(models.Model):
     emp_company_name = fields.Char("Company")
     emp_date_employed = fields.Char("Employed Dates")
     emp_position = fields.Char("Position")
-    emp_duties = fields.Char("Emp Duties")
+    emp_duties = fields.Html("Emp Duties")
 
 class ApplicantSkill(models.Model):
     _name = 'applicant.skill'
