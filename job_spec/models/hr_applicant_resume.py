@@ -22,6 +22,7 @@ class HRApplicantResume(models.Model):
     employment_history_ids = fields.One2many('applicant.employment.history', 'resume_id', string="Employment History")
     skill_ids = fields.One2many('applicant.skill', 'resume_id', string="Skills")
     reference_ids = fields.One2many('applicant.reference', 'resume_id', string="References")
+    skills_summary = fields.Text(string="Skills Summary")
 
 
     @api.model
