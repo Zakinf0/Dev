@@ -53,37 +53,37 @@
                 <xpath expr="//form/sheet/notebook" position="before">
                     <group attrs="{'invisible': [('consultant_interview_stage', '!=', True)]}">
                         <field name="tell_me_about_your_self"/>
-                        <!--<field name="when_can_you_start" />-->
-                        <field name="what_are_your_salary_expectations" />
-                        <field name="why_are_you_in_the_job_market_at_the_moment" />
-                        <field name="how_do_you_feel_about_counter_offer" />
-                        <field name="what_are_possibilities_of_counter_offer" />
+                        <field name="when_can_you_start"/>
+                        <field name="what_are_your_salary_expectations"/>
+                        <field name="why_are_you_in_the_job_market_at_the_moment"/>
+                        <field name="how_do_you_feel_about_counter_offer"/>
+                        <field name="what_are_possibilities_of_counter_offer"/>
                         <field name="what_are_your_proudest_professional_achievements"/>
-                        <field name="what_is_your_idea_work_environment" />
-                        <field name="are_you_interviewing_with_other_companies" />
-                        <field name="when_would_you_be_available_to_start_a_new_role" />
+                        <field name="what_is_your_idea_work_environment"/>
+                        <field name="are_you_interviewing_with_other_companies"/>
+                        <field name="when_would_you_be_available_to_start_a_new_role"/>
                     </group>
                     <group attrs="{'invisible': [('reference_check_1_stage', '!=', True)]}"  string="Reference Check 1">
                         <field name="reference_check_1_stage" invisible="1"/>
-                        <field name="ref_1_reference_check_for" required=""/>
-                        <field name="ref_1_referee_name" required=""/>
-                        <field name="ref_1_company" required=""/>
-                        <field name="ref_1_contact_number" required=""/>
-                        <field name="ref_1_company_worked_with" required=""/>
-                        <field name="ref_1_position_held" required=""/>
-                        <field name="ref_1_duration_worked" required=""/>
-                        <field name="ref_1_placement_position" required=""/>
-                        <field name="ref_1_skills_for_role" required=""/>
-                        <field name="ref_1_greatest_strengths" required=""/>
-                        <field name="ref_1_area_of_development" required=""/>
-                        <field name="ref_1_communication_skill" required=""/>
-                        <field name="ref_1_work_preference" required=""/>
-                        <field name="ref_1_relationship_with_coworkers" required=""/>
-                        <field name="ref_1_biggest_accomplishment" required=""/>
+                        <field name="ref_1_reference_check_for"/>
+                        <field name="ref_1_referee_name"/>
+                        <field name="ref_1_company"/>
+                        <field name="ref_1_contact_number"/>
+                        <field name="ref_1_company_worked_with"/>
+                        <field name="ref_1_position_held"/>
+                        <field name="ref_1_duration_worked"/>
+                        <field name="ref_1_placement_position"/>
+                        <field name="ref_1_skills_for_role"/>
+                        <field name="ref_1_greatest_strengths"/>
+                        <field name="ref_1_area_of_development"/>
+                        <field name="ref_1_communication_skill"/>
+                        <field name="ref_1_work_preference"/>
+                        <field name="ref_1_relationship_with_coworkers"/>
+                        <field name="ref_1_biggest_accomplishment"/>
                         <field name="ref_1_rating"/>
-                        <field name="ref_1_reason_for_leaving" required=""/>
+                        <field name="ref_1_reason_for_leaving"/>
                         <field name="ref_1_rehire"/>
-                        <field name="ref_1_additional_comments" required=""/>
+                        <field name="ref_1_additional_comments"/>
                     </group>
                     <group attrs="{'invisible': [('reference_check_2_stage', '!=', True)]}" string="Reference Check 2">
                         <field name="reference_check_2_stage" invisible="1"/>

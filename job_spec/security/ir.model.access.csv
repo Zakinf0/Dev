@@ -10,3 +10,4 @@ access_applicant_skill,access_applicant_skill,model_applicant_skill,base.group_u
 access_applicant_reference,access_applicant_reference,model_applicant_reference,base.group_user,1,1,1,1
 
 access_import_resume,access_import_resume,model_import_resume,base.group_user,1,1,1,1
+access_import_zakheni_resume,access_import_zakheni_resume,model_import_zakheni_resume,base.group_user,1,1,1,1

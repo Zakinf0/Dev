@@ -11,18 +11,16 @@ class HRApplicantResume(models.Model):
     applicant_id = fields.Many2one("hr.applicant")
     surname = fields.Char(string='Surname')
     first_name = fields.Char(string='First Name')
-    position = fields.Char(string='Position')
     id_passport = fields.Char(string='ID/Passport')
     email = fields.Char(related='applicant_id.email_from')
     languages = fields.Char(string='Languages')
     qualification_ids = fields.One2many('applicant.qualification', 'resume_id', string="Qualifications")
-    executive_summary = fields.Text(string='Executive Summary')
+    skills_summary = fields.Text(string='Skills summary')
     additional_comments = fields.Text(string='Additional Comments')
     course_ids = fields.One2many('applicant.course', 'resume_id', string="Courses")
     employment_history_ids = fields.One2many('applicant.employment.history', 'resume_id', string="Employment History")
     skill_ids = fields.One2many('applicant.skill', 'resume_id', string="Skills")
     reference_ids = fields.One2many('applicant.reference', 'resume_id', string="References")
-    skills_summary = fields.Text(string="Skills Summary")
 
 
     @api.model
@@ -30,8 +28,8 @@ class HRApplicantResume(models.Model):
         resume = super(HRApplicantResume, self).create(vals)
         if resume.first_name and resume.surname and resume.applicant_id:
             resume.display_name = resume.first_name + ' ' + resume.surname + ' - ' + resume.applicant_id.name.split('-')[1] if len(resume.applicant_id.name.split('-')) > 0 else ''
-        elif resume.first_name and resume.surname and resume.position:
-            resume.display_name = resume.first_name + ' ' + resume.surname + ' - ' + resume.position
+        elif resume.first_name and resume.surname:
+            resume.display_name = resume.first_name + ' ' + resume.surname
         else:
             pass
         return resume
@@ -42,8 +40,8 @@ class HRApplicantResume(models.Model):
             vals['display_name'] = vals.get('first_name') + ' ' + vals.get('surname') + ' - ' + \
                                 applicant_id.name.split('-')[1] if len(
                 applicant_id.name.split('-')) > 0 else ''
-        elif vals.get('first_name') and vals.get('surname') and vals.get('position'):
-            vals['display_name'] = vals.get('first_name') + ' ' + vals.get('surname') + ' - ' + vals.get('position')
+        elif vals.get('first_name') and vals.get('surname'):
+            vals['display_name'] = vals.get('first_name') + ' ' + vals.get('surname')
         else:
             pass
         res = super(HRApplicantResume, self).write(vals)

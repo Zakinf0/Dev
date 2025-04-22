@@ -17,10 +17,11 @@ Recruitment customisation
         'views/hr_applicant_resume.xml',
         'views/website_recruitment_templates.xml',
         'wizards/import_resume.xml',
+        'wizards/import_zakheni_resume.xml',
         'report/resume_report.xml'
     ],
     'external_dependencies': {
-        'python': ['rsaidnumber'],
+        'python': ['rsaidnumber', 'camelot', 'python-docx'],
         # can be install using command "pip install rsa-id-number".
     },
     'assets': {
