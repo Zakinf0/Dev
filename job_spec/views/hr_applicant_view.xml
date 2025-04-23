@@ -30,7 +30,7 @@
                 <xpath expr="//field[@name='linkedin_profile']" position="replace"/>
                 <xpath expr="//field[@name='type_id']" position="replace"/>
                 <xpath expr="//field[@name='categ_ids']" position="after">
-                    <!--<field name="location"/>-->
+                    <field name="location"/>
                     <field name="partner_mobile"/>
                     <field name="partner_phone"/>
                     <field name="linkedin_profile"/>
