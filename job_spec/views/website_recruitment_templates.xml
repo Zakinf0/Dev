@@ -45,8 +45,8 @@
                         <select id="mode_of_work" class="form-control s_website_form_input" name="mode_of_work"
                                 required="">
                             <option value="ST">Onsite</option>
-                            <option value="OB">Office</option>
-                            <option value="both">Both</option>
+                            <option value="OB">Remote</option>
+                            <option value="both">Hybrid</option>
                         </select>
                     </div>
                 </div>
