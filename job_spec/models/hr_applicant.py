@@ -31,7 +31,7 @@ class Applicant(models.Model):
     mode_of_work =  fields.Selection([('ST','Onsite'),('OB','Remote'), ('both','Hybrid')])
     how_many_years_of_experience = fields.Char(string="How many years of experience")
     notice_period = fields.Text(string="Notice period")
-    #location = fields.Text(string="Location")
+    location = fields.Text(string="Location")
 
     tell_me_about_your_self = fields.Text(string="1. Tell me about yourself")
     when_can_you_start = fields.Text(string="2. When can you start")
