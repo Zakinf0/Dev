@@ -9,7 +9,19 @@
                     </div>
                     <div class="col-2 offset-2 text-center">
                     </div>
-                    <div class="col-2 offset-3 text-end">
+                    <!--div class="col-2 offset-3 text-end">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><span class="page"/></li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item"><span class="topage"/></li>
+                        </ul>
+                    </div-->
+                </div>
+            </div>
+            <!-- New Footer Section for Page Numbering -->
+            <div class="footer">
+                <div class="row">
+                    <div class="col-12 text-end">
                         <ul class="list-inline">
                             <li class="list-inline-item"><span class="page"/></li>
                             <li class="list-inline-item">/</li>
@@ -18,6 +30,7 @@
                     </div>
                 </div>
             </div>
+<!-- Khutso Mabatamela -->
             <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
                 <t t-out="0"/>
             </div>
