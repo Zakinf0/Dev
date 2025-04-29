@@ -30,7 +30,7 @@ class HRApplicantResume(models.Model):
         resume = super(HRApplicantResume, self).create(vals)
         if resume.first_name and resume.surname and resume.applicant_id:
             resume.display_name = resume.first_name + ' ' + resume.surname + ' - ' + resume.applicant_id.name.split('-')[1] if len(resume.applicant_id.name.split('-')) > 0 else ''
-        elif resume.first_name and resume.surname:
+        elif resume.first_name and resume.surname and resume.position::
             resume.display_name = resume.first_name + ' ' + resume.surname + ' ' + resume.position
         else:
             pass
@@ -42,7 +42,7 @@ class HRApplicantResume(models.Model):
             vals['display_name'] = vals.get('first_name') + ' ' + vals.get('surname') + ' - ' + \
                                 applicant_id.name.split('-')[1] if len(
                 applicant_id.name.split('-')) > 0 else ''
-        elif vals.get('first_name') and vals.get('surname'):
+        elif vals.get('first_name') and vals.get('surname') and vals.get('position'):
             vals['display_name'] = vals.get('first_name') + ' ' + vals.get('surname') + ' ' + vals.get('position')
         else:
             pass
