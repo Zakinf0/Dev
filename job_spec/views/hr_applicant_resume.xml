@@ -23,16 +23,17 @@
                             <group>
                                 <field name="surname"/>
                                 <field name="first_name"/>
+                                <field name="position"/>
                             </group>
                             <group>
                                 <field name="id_passport"/>
                                 <field name="languages"/>
                             </group>
                         </group>
-<!--                        <group name="skill_summary" string="Skills Summary">-->
-<!--                            <field name="skills_summary">-->
-<!--                            </field>-->
-<!--                        </group>-->
+                        <group name="executive_summary" string="Executive Summary">
+                            <field name="executive_summary">
+                            </field>
+                        </group>
 <!--                        <group name="additional_comments" string="Additional Comments">-->
 <!--                            <field name="additional_comments">-->
 <!--                            </field>-->
